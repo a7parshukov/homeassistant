@@ -1,0 +1,30 @@
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use_percent
+    - type: network_in
+      arg: eth0
+    - type: ipv4_address
+      arg: eth0
+    - type: processor_temperature
+    - type: disk_use
+      arg: /
+    - type: disk_free
+      arg: /
+    - type: memory_use
+    - type: memory_free
+    - type: processor_use
+
+- platform: sql
+  db_url: mysql://homeassistant:po5lk3mn135@core-mariadb/homeassistant?charset=utf8mb4
+  queries:
+    - name: DB size
+      query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+      column: 'value'
+      unit_of_measurement: MB

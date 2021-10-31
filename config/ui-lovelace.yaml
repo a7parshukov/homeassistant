@@ -1,0 +1,125 @@
+title: MY HOME
+views:
+  - title: ОБЗОР
+    icon: mdi:home
+
+    cards:
+      - type: markdown
+        content: >
+          **ОБЩИЕ ДАННЫЕ**
+
+      - type: vertical-stack
+        cards:
+        - type: entities
+          # title: ТУТ ИМЯ КАРТЫ
+          #icon: mdi:clock
+          show_header_toggle: false
+          entities:
+            - entity: sensor.date
+              #type:
+              name: Дата
+              icon: mdi:calendar-range
+              format: date
+            - entity: sensor.time
+              #type:
+              name: Время
+              icon: mdi:clock-outline
+              format: time
+            - type: section
+              label: Погода
+            - type: attribute
+              entity: weather.home_assistant
+              attribute: temperature
+              suffix: °С
+              name: Температура на улице
+              icon: mdi:thermometer
+            - type: attribute
+              entity: weather.home_assistant
+              attribute: humidity
+              suffix: '%'
+              name: Влажность на улице
+              icon: mdi:water-percent
+              # сделать "облачность" и так далее - заменить слова иконками
+
+      - type: markdown
+        content: >
+          **СЕРВИС**
+
+      - type: horizontal-stack
+        #title: Сервис
+        cards:
+        - type: gauge
+          entity: sensor.processor_temperature
+          name: Температура процессора
+          #unit:
+          severity:
+            green: 0
+            yellow: 50
+            red: 80
+        - type: gauge
+          entity: sensor.processor_use_percent
+          name: Загруженность процессора
+          #unit: 
+          severity:
+            green: 0
+            yellow: 50
+            red: 80
+        - type: gauge
+          entity: sensor.memory_use_percent
+          name: Загрузка ОЗУ
+          #unit: 
+          severity:
+            green: 0
+            yellow: 50
+            red: 80
+
+      - type: markdown
+        content: >
+          **ПАМЯТЬ**
+
+      - type: vertical-stack
+        cards:
+        - type: horizontal-stack
+          #title: Память
+          cards:
+            - type: gauge
+              entity: sensor.disk_use_percent
+              name: Используется
+              #unit: 
+              severity:
+                green: 0
+                yellow: 50
+                red: 80
+            - type: gauge
+              entity: sensor.disk_free
+              name: Свободно
+              unit: 'Гб'
+              min: 0
+              max: 6.4
+              severity:
+                green: 5
+                yellow: 2
+                red: 0
+        - type: entities
+          entities:
+            - type: section
+              label: База данных
+            - entity: sensor.db_size
+              name: Объём базы данных
+              icon: mdi:database
+        - type: history-graph
+          hours_to_show: 24
+          refresh_interval: 300 # once 5 min
+          #title: 'Наполнение базы данных'
+          entities:
+            - entity: sensor.db_size
+              name: Maria DB
+
+  - title: КОМНАТА
+    icon: mdi:television
+  - title: КУХНЯ
+    icon: mdi:pot
+  - title: КОРИДОР
+    icon: mdi:door
+  - title: ВАННАЯ
+    icon: mdi:shower

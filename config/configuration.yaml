@@ -1,0 +1,39 @@
+homeassistant:
+  name: Home Assistant
+  latitude: !secret latitude_coord
+  longitude: !secret longitude_coord
+  elevation: !secret elevation_coord
+  unit_system: metric
+  currency: RUB
+  time_zone: "Europe/Moscow"
+  # external_url: "https://www.example.com"
+  internal_url: "http://homeassistant.local:8123"
+  #allowlist_external_dirs:
+  #  - "/usr/var/dumping-ground"
+  #  - "/tmp"
+  #allowlist_external_urls:
+  #  - "http://images.com/image1.png"
+  #media_dirs:
+  #  media: "/media"
+  #  recordings: "/mnt/recordings"
+  #legacy_templates: false
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+lovelace:
+  mode: yaml
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# Link to external files:
+group: !include includes/groups.yaml
+script: !include includes/scripts.yaml
+scene: !include includes/scenes.yaml
+recorder: !include includes/recorder.yaml
+
+# Link to external folders:
+sensor: !include_dir_merge_list includes/sensor
+automation: !include_dir_merge_list includes/automation
