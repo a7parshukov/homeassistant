@@ -1,16 +1,5 @@
-# КУХНЯ. УПРАВЛЕНИЕ КАНАЛОМ 1
+# КУХНЯ. УПРАВЛЕНИЕ 1 КАНАЛ
 - alias: kitchen_2x_switch_1
-  #initial_state: false
-  trigger:
-    - platform: state
-      entity_id: sensor.0x00158d0006d31880_action
-      to: 'left'
-  action:
-    - service: switch.toggle
-      entity_id: switch.0x00158d00067c97ef_l1
-
-# КУХНЯ. УПРАВЛЕНИЕ КАНАЛОМ 2
-- alias: kitchen_2x_switch_2
   #initial_state: false
   trigger:
     - platform: state
@@ -18,17 +7,29 @@
       to: 'right'
   action:
     - service: switch.toggle
-      entity_id: switch.0x00158d00067c97ef_l2
+      entity_id: 
+      - switch.0x00158d00067c97ef_l1
 
-# КУХНЯ. ВЫКЛЮЧИТЬ ВСЁ
-- alias: kitchen_2x_switch_all
+# КУХНЯ. ВЫКЛЮЧИТЬ ВСЕ
+- alias: kitchen_2x_switch_2
   #initial_state: false
   trigger:
     - platform: state
       entity_id: sensor.0x00158d0006d31880_action
-      to: 'right_long'
+      to: 'both'
   action:
     - service: switch.turn_off
       entity_id:
       - switch.0x00158d00067c97ef_l1
       - switch.0x00158d00067c97ef_l2
+
+# КУХНЯ. УПРАВЛЕНИЕ 2 КАНАЛ
+- alias: kitchen_2x_switch_all
+  #initial_state: false
+  trigger:
+    - platform: state
+      entity_id: sensor.0x00158d0006d31880_action
+      to: 'left'
+  action:
+    - service: switch.toggle
+      entity_id: switch.0x00158d00067c97ef_l2
